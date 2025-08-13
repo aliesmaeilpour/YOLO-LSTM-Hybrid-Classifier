@@ -7,7 +7,7 @@ class YOLOv11mLSTMClassifier(nn.Module):
     def __init__(self, num_classes=2, dropout_prob=0.5, lstm_dropout=0.3):
         super(YOLOv11mLSTMClassifier, self).__init__()
         
-        self.backbone = self._create_yolov8_backbone()
+        self.backbone = self._create_yolov11_backbone()
         
         # Freezing strategy
         self._freeze_backbone_layers()
@@ -33,7 +33,7 @@ class YOLOv11mLSTMClassifier(nn.Module):
         # Weight initialization
         # self._init_weights()
 
-    def _create_yolov8_backbone(self):
+    def _create_yolov11_backbone(self):
         """Create and return YOLOv8 backbone without detection heads"""
 
         model = YOLO('yolo11m-cls.pt')
