@@ -1,5 +1,9 @@
-torch
-torchvision
-ultralytics
-matplotlib
-numpy
+torch==2.3.0
+torchvision==0.18
+ultralytics==8.13.176
+matplotlib==3.8.4
+numpy==1.26.3
+fastapi==0.116.1
+uvicorn==0.35.0
+opencv-python==4.9.0.80
+scikit-learn==1.4.2

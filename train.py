@@ -46,7 +46,7 @@ class_names = image_datasets['train'].classes
 model = YOLOv11mLSTMClassifier(num_classes=2).to(device)
 
 # Define loss function and optimizer
-criterion = nn.CrossEntropyLoss()
+loss_fn = nn.CrossEntropyLoss()
 optimizer = optim.AdamW(model.parameters(), lr=0.0001, weight_decay=1e-5)
 
 # Learning rate scheduler
@@ -56,7 +56,7 @@ scheduler = optim.lr_scheduler.ReduceLROnPlateau(
     factor=0.1
 )
 
-def train_model(model, criterion, optimizer, scheduler, num_epochs=50):
+def train_model(model, loss_fn, optimizer, scheduler, num_epochs=50):
     since = time.time()
     best_model_wts = copy.deepcopy(model.state_dict())
     best_acc = 0.0
@@ -82,7 +82,7 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=50):
             
             outputs = model(inputs)
             _, preds = torch.max(outputs, 1)
-            loss = criterion(outputs, labels)
+            loss = loss_fn(outputs, labels)
             
             loss.backward()
             optimizer.step()
